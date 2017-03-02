@@ -8,7 +8,8 @@ public class ConnectionFactory {
 
 	
 	public Connection getConnection() throws SQLException {
-		System.out.println("conectando ...");
+		
+		System.out.println("Conectando ao banco de dados HSQLDB...");
 
 		try {
 			Class.forName("org.hsqldb.jdbcDriver");
