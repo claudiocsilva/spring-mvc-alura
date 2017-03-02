@@ -6,7 +6,34 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Caelum</title>
+<title>Listar Contas</title>
+
+<script src="resources/js/jquery.js"></script>
+<script type="text/javascript">
+
+	function deuCerto(dadosDaResposta){
+		alert("Conta paga com sucesso");
+		location.reload();
+	}
+
+	function pagarAgora(id) {
+		$.get("pagaConta?id=" + id, deuCerto);
+	}
+	
+// 	function pagaAgora(id) {
+// 	    $.post("pagaConta", {'id' : id}, function() {
+// 	      alert("Conta paga com sucesso");
+// 	      location.reload();
+// 	    });
+// 	  }
+	
+	function pagaAgora(id) {
+		$.post("pagaConta", {'id' : id}, function() {
+		  $("#conta_"+id).html("Paga");
+		});
+		}
+	
+</script>
 </head>
 <body>
 	<table style="height: 10px; width: 775px;" border="1">
@@ -33,7 +60,11 @@
 				<td id="conta_${conta.id}">
 				
 				<c:if test="${conta.paga eq false}">
-                    Não paga
+				
+                    <a href="#" onClick="pagaAgora(${conta.id});">
+      					Pagar agora!
+    				</a>
+ 
                 </c:if> <c:if test="${conta.paga eq true }">
                     Paga!
                 </c:if>
@@ -45,11 +76,18 @@
 				
 				<td>
 				<a href="removeConta?id=${conta.id}">Remover</a> /
-				<a href="mostraConta?id=${conta.id}">Alterar</a>
+				<a href="mostraConta?id=${conta.id}">Alterar</a> /
+				
+				<c:if test="${conta.paga eq false}">
+					<a href="#" onclick="pagarAgora(${conta.id});">Pagar</a>
+				</c:if>
+				
 				</td>
 			</tr>
 		</c:forEach>
 	</table>
+	
+	<a href="logout">Clique aqui</a> para sair
 	
 
 </body>

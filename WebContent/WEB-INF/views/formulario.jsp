@@ -23,6 +23,10 @@
 		</br>
 		</br>
 		<input type="submit" value="Adicionar"/>
+		</br>
+		</br>
+		</br>
+		<a href="logout">Clique aqui</a> para sair
 	</form>
 </body>
 </html>
